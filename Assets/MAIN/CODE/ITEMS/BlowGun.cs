@@ -4,18 +4,14 @@ public class BlowGun : Item
 {
     public GameObject arrow;
 
-    public Vector3 pointA;
-    public Vector3 pointB;
-    public Material planeMaterial;
-
     public float forwardOffset = 1;
     public float overlapRadius = 2;
     public float maxForce = 5;
     public float forceModifier = 1;
     public float arrowVisualMultiplier = 5;
 
-    GameObject plane;
     float force = 0;
+    float pressedTime = 0;
 
     public override void Hold(Transform caster)
     {
@@ -45,24 +41,5 @@ public class BlowGun : Item
         }
 
         force = 0;
-    }
-
-    void DrawPlane(Vector3 a, Vector3 b)
-    {
-        Vector3 center = (a + b) / 2f;
-        Vector3 direction = b - a;
-
-        if(plane == null)
-            plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-
-        plane.transform.position = center;
-
-        float distance = direction.magnitude;
-        plane.transform.localScale = new Vector3(distance / 10f, 1f, 0.1f);
-
-        if (planeMaterial != null)
-        {
-            plane.GetComponent<Renderer>().material = planeMaterial;
-        }
     }
 }
